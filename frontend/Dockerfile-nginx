@@ -1,0 +1,12 @@
+# Используем официальный образ nginx
+FROM nginx:alpine
+
+# Копируем конфигурацию nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Копируем сертификаты Let's Encrypt
+COPY certs/live/frontquiz.space/fullchain.pem /etc/nginx/certs/live/frontquiz.space/fullchain.pem
+COPY certs/live/frontquiz.space/privkey.pem /etc/nginx/certs/live/frontquiz.space/privkey.pem
+
+# Копируем статические файлы фронтенда из локального сервиса frontend
+COPY --from=interviewbase-frontend /app/dist /usr/share/nginx/html

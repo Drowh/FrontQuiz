@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "migrate:lessons": "tsx scripts/migrate-lessons.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.1",
+    "@types/node": "^20.11.24"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.7",
+    "dotenv": "^16.4.5"
+  }
+}

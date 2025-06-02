@@ -1,0 +1,452 @@
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Inter", sans-serif;
+  }
+}
+
+:root {
+  --primary: #3cdfff;
+  --primary-light: #0077cc;
+  --secondary: #683de5;
+  --secondary-light: #4a2ca3;
+  --third: #0cf2b4;
+  --third-light: #00b38f;
+  --scrollbar-track-light: #e9ecef;
+  --scrollbar-track-dark: #2a2a40;
+  --scrollbar-thumb-light: #0077cc;
+  --scrollbar-thumb-dark: #3cdfff;
+  --scrollbar-thumb-hover-light: #005fa3;
+  --scrollbar-thumb-hover-dark: #2ac8e6;
+}
+
+/* Стили для основного скролла */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-light-sidebar dark:bg-dark-sidebar;
+  background: var(--scrollbar-track-light);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-light-border dark:bg-dark-border rounded-full;
+  background: var(--scrollbar-thumb-light);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-light dark:bg-primary;
+  background: var(--scrollbar-thumb-hover-light);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-dark);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-light) var(--scrollbar-track-light);
+}
+
+.dark * {
+  scrollbar-color: var(--scrollbar-thumb-dark) var(--scrollbar-track-dark);
+}
+
+body {
+  @apply bg-light-bg dark:bg-dark-bg text-text-primary-light dark:text-text-primary;
+}
+
+/* Стили для checkbox */
+.custom-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--scrollbar-track-light);
+  border-radius: 4px;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+}
+
+.dark .custom-checkbox {
+  border-color: var(--scrollbar-track-dark);
+}
+
+.custom-checkbox:checked {
+  border-color: var(--primary-light);
+  background-color: var(--primary-light);
+}
+
+.dark .custom-checkbox:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.custom-checkbox:checked:after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Стили для radio */
+.custom-radio {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--scrollbar-track-light);
+  border-radius: 50%;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+}
+
+.dark .custom-radio {
+  border-color: var(--scrollbar-track-dark);
+}
+
+.custom-radio:checked {
+  border-color: var(--primary-light);
+  background-color: var(--primary-light);
+}
+
+.dark .custom-radio:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.custom-radio:checked:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) skewX(-12deg); }
+  100% { transform: translateX(200%) skewX(-12deg); }
+}
+
+@keyframes confetti-0 {
+  0% { 
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% { 
+    transform: translateY(100px) rotate(360deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-1 {
+  0% { 
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% { 
+    transform: translateY(120px) rotate(-360deg) scale(0.3);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-2 {
+  0% { 
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% { 
+    transform: translateY(80px) rotate(180deg) scale(0.7);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-3 {
+  0% { 
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% { 
+    transform: translateY(110px) rotate(-180deg) scale(0.4);
+    opacity: 0;
+  }
+}
+
+@keyframes star-burst {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flash {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-confetti-0 {
+  animation: confetti-0 1.5s ease-out forwards;
+}
+
+.animate-confetti-1 {
+  animation: confetti-1 1.8s ease-out forwards;
+}
+
+.animate-confetti-2 {
+  animation: confetti-2 1.3s ease-out forwards;
+}
+
+.animate-confetti-3 {
+  animation: confetti-3 1.6s ease-out forwards;
+}
+
+.animate-star-burst {
+  animation: star-burst 1s ease-out forwards;
+}
+
+.animate-flash {
+  animation: flash 0.8s ease-out;
+}
+
+/* Градиентный фон для вспышки */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Анимация градиента */
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient-flow-reverse {
+  0% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Классы для анимированных градиентов */
+.bg-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradient-flow 4s ease infinite;
+}
+
+.bg-gradient-flow-reverse {
+  background-size: 200% 200%;
+  animation: gradient-flow-reverse 4s ease infinite;
+}
+
+.bg-gradient-flow-slow {
+  background-size: 200% 200%;
+  animation: gradient-flow 6s ease infinite;
+}
+
+.bg-gradient-flow-reverse-slow {
+  background-size: 200% 200%;
+  animation: gradient-flow-reverse 6s ease infinite;
+}
+
+/* Дополнительные эффекты при наведении */
+.gradient-button-hover {
+  transition: all 0.3s ease;
+}
+
+.gradient-button-hover:hover {
+  animation-duration: 2s;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dark .gradient-button-hover:hover {
+  box-shadow: 0 8px 25px rgba(60, 223, 255, 0.2);
+}
+
+
+/* Добавляем новые классы для кнопок с анимацией прогресс-бара */
+
+/* Анимация градиента как у прогресс-бара */
+@keyframes gradient-progress {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Медленная версия анимации для кнопок */
+@keyframes gradient-progress-slow {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Очень медленная версия */
+@keyframes gradient-progress-slower {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Классы для кнопок с анимацией прогресс-бара */
+.btn-progress-animated {
+  background: linear-gradient(to right, 
+    var(--secondary-light), 
+    var(--primary-light), 
+    var(--secondary-light)
+  );
+  background-size: 200% 100%;
+  animation: gradient-progress 2s ease infinite;
+}
+
+.dark .btn-progress-animated {
+  background: linear-gradient(to right, 
+    var(--secondary), 
+    var(--primary), 
+    var(--secondary)
+  );
+  background-size: 200% 100%;
+  animation: gradient-progress 2s ease infinite;
+}
+
+/* Медленная версия - 3 секунды */
+.btn-progress-animated-slow {
+  background: linear-gradient(to right, 
+    var(--secondary-light), 
+    var(--primary-light), 
+    var(--secondary-light)
+  );
+  background-size: 200% 100%;
+  animation: gradient-progress-slow 4s ease infinite;
+}
+
+.dark .btn-progress-animated-slow {
+  background: linear-gradient(to right, 
+    var(--secondary), 
+    var(--primary), 
+    var(--secondary)
+  );
+  background-size: 200% 100%;
+  animation: gradient-progress-slow 4s ease infinite;
+}
+
+/* Очень медленная версия - 4 секунды */
+.btn-progress-animated-slower {
+  background: linear-gradient(to right, 
+    var(--secondary-light), 
+    var(--primary-light), 
+    var(--secondary-light)
+  );
+  background-size: 200% 100%;
+  animation: gradient-progress-slower 4s ease infinite;
+}
+
+.dark .btn-progress-animated-slower {
+  background: linear-gradient(to right, 
+    var(--secondary), 
+    var(--primary), 
+    var(--secondary)
+  );
+  background-size: 200% 100%;
+  animation: gradient-progress-slower 4s ease infinite;
+}
+
+/* Версия с обратным направлением для кнопки "Дальше" */
+.btn-progress-animated-reverse {
+  background: linear-gradient(to left, 
+    var(--secondary-light), 
+    var(--primary-light), 
+    var(--secondary-light)
+  );
+  background-size: 200% 100%;
+  animation: gradient-progress 2s ease infinite;
+}
+
+.dark .btn-progress-animated-reverse {
+  background: linear-gradient(to left, 
+    var(--secondary), 
+    var(--primary), 
+    var(--secondary)
+  );
+  background-size: 200% 100%;
+  animation: gradient-progress 2s ease infinite;
+}
+
+/* Медленная обратная версия */
+.btn-progress-animated-reverse-slow {
+  background: linear-gradient(to left, 
+    var(--secondary-light), 
+    var(--primary-light), 
+    var(--secondary-light)
+  );
+  background-size: 200% 100%;
+  animation: gradient-progress-slow 4s ease infinite;
+}
+
+.dark .btn-progress-animated-reverse-slow {
+  background: linear-gradient(to left, 
+    var(--secondary), 
+    var(--primary), 
+    var(--secondary)
+  );
+  background-size: 200% 100%;
+  animation: gradient-progress-slow 4s ease infinite;
+}
+
+/* Дополнительные эффекты при наведении для новых кнопок */
+.btn-progress-hover {
+  transition: all 0.3s ease;
+}
+
+.btn-progress-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dark .btn-progress-hover:hover {
+  box-shadow: 0 8px 25px rgba(60, 223, 255, 0.2);
+}

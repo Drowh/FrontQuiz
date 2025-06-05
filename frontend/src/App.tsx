@@ -9,6 +9,8 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { NotificationProvider } from "./components/common/NotificationManager";
 import { LoadingScreen } from "./components/LoadingScreen";
 import AddLessonPage from "./pages/AddLessonPage";
+import QuizPage from "./components/assessment/QuizPage";
+import Header from "./components/layout/Header";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,31 +41,39 @@ function App() {
           <Router
             future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
           >
-            <Routes>
-              <Route path="/auth" element={<AuthPage />} />
-              <Route
-                path="/"
-                element={
-                  <HomePage
-                    searchQuery={searchQuery}
-                    setSearchQuery={handleSearchChange}
-                  />
-                }
-              />
-
-              <Route
-                path="/lesson/:category/:id"
-                element={
-                  <ProtectedRoute>
-                    <LessonPage
+            <Header
+              searchQuery={searchQuery}
+              setSearchQuery={handleSearchChange}
+            />
+            <div className="pt-16">
+              <Routes>
+                <Route path="/auth" element={<AuthPage />} />
+                <Route
+                  path="/"
+                  element={
+                    <HomePage
                       searchQuery={searchQuery}
                       setSearchQuery={handleSearchChange}
                     />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/admin/add-lesson" element={<AddLessonPage />} />
-            </Routes>
+                  }
+                />
+
+                <Route path="/quiz" element={<QuizPage />} />
+
+                <Route
+                  path="/lesson/:category/:id"
+                  element={
+                    <ProtectedRoute>
+                      <LessonPage
+                        searchQuery={searchQuery}
+                        setSearchQuery={handleSearchChange}
+                      />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="/admin/add-lesson" element={<AddLessonPage />} />
+              </Routes>
+            </div>
           </Router>
         )}
       </NotificationProvider>

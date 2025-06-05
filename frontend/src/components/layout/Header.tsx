@@ -6,6 +6,8 @@ import SearchInput from "../filters/SearchInput";
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../common/NotificationManager";
+import { useThemeStore } from "../../store/useThemeStore";
+import { useSystemTheme } from "../../hooks/useSystemTheme";
 
 interface HeaderProps {
   searchQuery: string;
@@ -18,28 +20,14 @@ const Header = ({ searchQuery, setSearchQuery }: HeaderProps) => {
   const { showNotification } = useNotification();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showLogoutWarning, setShowLogoutWarning] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      return savedTheme === "dark";
-    }
-    return true;
-  });
+  const { theme, setTheme } = useThemeStore();
+  const systemTheme = useSystemTheme();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [isDarkMode]);
+  const isDark = theme === "system" ? systemTheme === "dark" : theme === "dark";
 
   const toggleTheme = () => {
-    const newTheme = !isDarkMode;
-    setIsDarkMode(newTheme);
+    setTheme(isDark ? "light" : "dark");
   };
 
   const toggleDropdown = () => {
@@ -102,12 +90,22 @@ const Header = ({ searchQuery, setSearchQuery }: HeaderProps) => {
               <span className="sm:hidden mr-1">Все</span>
               <span className="hidden sm:inline">Все вопросы</span>
             </Link>
+            <Link
+              to="/quiz"
+              className={`relative font-tektur text-text-primary-light dark:text-text-primary px-2 md:px-4 py-2 text-sm md:text-base transition-all duration-300 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-secondary-light dark:after:bg-secondary after:transition-all after:duration-300 hover:after:w-[80%] ${
+                isActive("/quiz") ? "after:w-[80%]" : ""
+              }`}
+            >
+              Тест
+            </Link>
           </div>
-          <div className="flex-1 justify-end max-w-[240px] xs:max-w-[280px] sm:max-w-none sm:w-auto flex items-center space-x-2 md:space-x-4 relative ml-1">
-            <SearchInput
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-            />
+          <div className="flex-1 justify-end max-w-[190px] xs:max-w-[280px] sm:max-w-none sm:w-auto flex items-center space-x-2 md:space-x-4 relative ml-1">
+            {location.pathname !== "/quiz" && (
+              <SearchInput
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+              />
+            )}
             {telegramId && (
               <button
                 onClick={toggleDropdown}
@@ -127,7 +125,7 @@ const Header = ({ searchQuery, setSearchQuery }: HeaderProps) => {
                   onClick={toggleTheme}
                   className="flex items-center w-full text-left px-3 md:px-4 py-2 text-xs md:text-sm text-text-primary-light dark:text-text-primary hover:text-secondary-light dark:hover:text-secondary transition-colors duration-200"
                 >
-                  {isDarkMode ? (
+                  {isDark ? (
                     <>
                       <RiSunLine className="mr-2" size={16} />
                       Светлая тема

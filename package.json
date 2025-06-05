@@ -3,11 +3,13 @@
     "migrate:lessons": "tsx scripts/migrate-lessons.ts"
   },
   "devDependencies": {
+    "@types/node": "^20.17.57",
+    "dotenv": "^16.5.0",
+    "ts-node": "^10.9.2",
     "tsx": "^4.7.1",
-    "@types/node": "^20.11.24"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.7",
-    "dotenv": "^16.4.5"
+    "@supabase/supabase-js": "^2.39.7"
   }
 }

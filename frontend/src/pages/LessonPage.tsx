@@ -312,7 +312,7 @@ const LessonPage = ({ searchQuery, setSearchQuery }: LessonPageProps) => {
   return (
     <>
       <div
-        className={`min-h-screen bg-light-bg dark:bg-dark-bg text-text-primary-light dark:text-text-primary pt-20 flex flex-col transition-all duration-500 ease-in-out ${
+        className={`min-h-screen bg-light-bg dark:bg-dark-bg text-text-primary-light dark:text-text-primary pt-4 flex flex-col transition-all duration-500 ease-in-out ${
           isNavigating ? "opacity-0" : "opacity-100"
         }`}
       >

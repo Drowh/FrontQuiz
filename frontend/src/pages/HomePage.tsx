@@ -113,7 +113,7 @@ const HomePage = ({ searchQuery, setSearchQuery }: HomePageProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-light-bg dark:bg-dark-bg text-text-primary-light dark:text-text-primary pt-20 flex flex-col animate-in fade-in duration-300">
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg text-text-primary-light dark:text-text-primary pt-4 flex flex-col animate-in fade-in duration-300">
       <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       <div className="flex-1">

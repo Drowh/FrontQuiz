@@ -16,7 +16,7 @@ services:
     env_file:
       - ./backend/.env
     ports:
-      - "8080:8080"
+      - "8200:8080"
     networks:
       - app-network
 
